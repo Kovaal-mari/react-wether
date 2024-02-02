@@ -1,0 +1,80 @@
+@import "../../styles/variables.scss";
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.change_theme,
+.logo {
+  margin-right: 20px;
+}
+
+.logo {
+  svg {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 25px;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+
+  input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  ul {
+    position: absolute;
+    top: 9px;
+    background: #fff;
+    border: #ccc;
+    z-index: 1000;
+    margin-left: 1px;
+
+    li {
+      list-style-type: none;
+      button {
+        padding: 10px;
+        box-sizing: border-box;
+        width: 100%;
+        text-align: left;
+        font-size: 16px;
+        background-color: #fff;
+        color: #000;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+    }
+  }
+  button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+}
