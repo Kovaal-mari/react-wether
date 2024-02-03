@@ -1,7 +1,7 @@
-import React from "react";
+import { IndicatorSvgSelector } from "../../../../assets/icons/indicators/IndicatorSvgSelector";
+import { useAppSelector } from "../../../../store/hooks";
 import { Item } from "./ThisDayInfo";
 import styles from "./ThisDayInfo.module.scss";
-import { IndicatorSvgSelector } from "../../../../assets/icons/indicators/IndicatorSvgSelector";
 
 interface Props {
   item: Item;
@@ -9,6 +9,8 @@ interface Props {
 
 export const ThisDayItem = ({ item }: Props) => {
   const { icon_id, name, value } = item;
+  const state = useAppSelector((state) => state.weather);
+  
   return (
     <div className={styles.item}>
       <div className={styles.indicator}>

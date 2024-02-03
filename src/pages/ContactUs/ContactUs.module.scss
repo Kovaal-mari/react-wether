@@ -1,6 +1,8 @@
 @import "../../styles/variables.scss";
 
 .contact {
+  display: flex;
+  justify-content: space-between;
   .contact_form {
     max-width: 700px;
     width: 100%;
@@ -22,8 +24,9 @@
   .contact_field {
     margin-top: 10px;
     outline: none;
-    padding: 8px 14px;
-    border: 1px solid #000;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #000;
     border-radius: 4px;
     resize: none;
   }
@@ -45,5 +48,23 @@
     & p {
       margin: 0;
     }
+  }
+
+  .contact_headline {
+    font-weight: 700;
+    font-size: 32px;
+  }
+  
+  .contact_headline_span {
+    color: $primary-color;
+  }
+
+  .contact_headline_wrapper {
+    max-width: 450px;
+  }
+
+  .contact_form_wrapper {
+    max-width: 600px;
+    width: 100%;
   }
 }

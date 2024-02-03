@@ -1,22 +1,26 @@
+import { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { GlobalSvgSelector } from "../../assets/icons/global/GlobalSvgSelector";
 import Button from "../../components/Button/Button";
 import { optionType } from "../../interface/interface";
+import { AppDispatch } from "../../store/configureStore";
+import { fetchCity } from "../../store/weatherSlice";
 import styles from "./Header.module.scss";
-import { ChangeEvent, useEffect, useState } from "react";
 
 export const Header = (): JSX.Element => {
   const APP_API_KEY = process.env.APP_API_KEY;
   const [searchCity, setSearchCity] = useState<string>("");
   const [city, setCity] = useState<optionType | null>(null);
   const [options, setOptions] = useState<[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
 
   const getSearchOptions = (value: string) => {
     fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=${APP_API_KEY}`
     )
       .then((res) => res.json())
-      .then((data) => setOptions(data));
+      .then((data) => setOptions(data))
   };
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,18 +30,13 @@ export const Header = (): JSX.Element => {
     getSearchOptions(value);
   };
 
-  const getForecast = (city: optionType) => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&units=matric&appid=${APP_API_KEY}`
-    )
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
-
   const onSubmit = () => {
     if (!city) return;
 
-    getForecast(city);
+    dispatch(fetchCity({
+      searchCity: searchCity,
+      days: 7,
+    }));
   };
 
   const onOptionSelect = (option: optionType) => {
@@ -49,7 +48,7 @@ export const Header = (): JSX.Element => {
       setSearchCity(city.name);
       setOptions([]);
     }
-  }, [city]);
+  }, [city, dispatch]);
 
   return (
     <header className={styles.header}>
@@ -71,6 +70,7 @@ export const Header = (): JSX.Element => {
             type="text"
             value={searchCity}
             onChange={onInputChange}
+            placeholder="New York"
           />
           <ul>
             {options.map((option: optionType, index: number) => (

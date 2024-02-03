@@ -48,7 +48,10 @@ const ContactUs = () => {
           phone: phone,
           message: message,
         };
-        const response = await axios.post('http://localhost:3002/contact', data);
+        const response = await axios.post(
+          "http://localhost:3002/contact",
+          data
+        );
         return response.data;
       }
     }
@@ -60,72 +63,79 @@ const ContactUs = () => {
 
   return (
     <div className={styles.contact}>
-      {!isFormSent && (
-        <form className={styles.contact_form}>
-          <div className={styles.contact_form_wrapper}>
-            <div>
-              <label className={styles.contact_label} htmlFor="name">
-                Name
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className={styles.contact_field}
-                  value={name}
-                  placeholder="Marina"
-                  onChange={handleNameChange}
-                />
-              </label>
+      <div className={styles.contact_headline_wrapper}>
+        <p className={styles.contact_headline}>
+          Let's discuss on something <span className={styles.contact_headline_span}>cool</span> together
+        </p>
+      </div>
+      <div className={styles.contact_form_wrapper}>
+        {!isFormSent && (
+          <form className={styles.contact_form}>
+            <div className={styles.contact_form_wrapper}>
+              <div>
+                <label className={styles.contact_label} htmlFor="name">
+                  Name
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    className={styles.contact_field}
+                    value={name}
+                    placeholder="Your name"
+                    onChange={handleNameChange}
+                  />
+                </label>
+              </div>
+              <div>
+                <label className={styles.contact_label} htmlFor="email">
+                  Email
+                  <input
+                    type="text"
+                    id="email"
+                    placeholder="Your email"
+                    name="email"
+                    className={styles.contact_field}
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
+                </label>
+              </div>
+              <div>
+                <label className={styles.contact_label} htmlFor="phone">
+                  Phone
+                  <input
+                    type="text"
+                    id="phone"
+                    placeholder="Your phone number"
+                    className={styles.contact_field}
+                    name="phone"
+                    value={phone}
+                    onChange={handlePhoneChange}
+                  />
+                </label>
+              </div>
+              <div>
+                <label className={styles.contact_label} htmlFor="message">
+                  Message
+                  <textarea
+                    id="message"
+                    rows={20}
+                    cols={10}
+                    placeholder="Your message"
+                    className={styles.contact_field}
+                    name="message"
+                    value={message}
+                    onChange={handleMessageChange}
+                  ></textarea>
+                </label>
+              </div>
             </div>
-            <div>
-              <label className={styles.contact_label} htmlFor="email">
-                Email
-                <input
-                  type="text"
-                  id="email"
-                  placeholder="ilovenikusya@gmail.com"
-                  name="email"
-                  className={styles.contact_field}
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-              </label>
+            <div className={styles.contact_btn_wrapper}>
+              <Button onClick={onSubmit}>Submit</Button>
             </div>
-            <div>
-              <label className={styles.contact_label} htmlFor="phone">
-                Phone
-                <input
-                  type="text"
-                  id="phone"
-                  placeholder="+380994441111"
-                  className={styles.contact_field}
-                  name="phone"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                />
-              </label>
-            </div>
-            <div>
-              <label className={styles.contact_label} htmlFor="message">
-                Message
-                <textarea
-                  id="message"
-                  rows={20}
-                  cols={10}
-                  placeholder="This is the best app I've ever used"
-                  className={styles.contact_field}
-                  name="message"
-                  value={message}
-                  onChange={handleMessageChange}
-                ></textarea>
-              </label>
-            </div>
-          </div>
-          <div className={styles.contact_btn_wrapper}>
-            <Button onClick={onSubmit}>Submit</Button>
-          </div>
-        </form>
-      )}
+          </form>
+        )}
+      </div>
       {isFormSent && (
         <div className={styles.contact_sent_form}>
           <p>Thanks for contacting us!</p>

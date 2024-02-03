@@ -1,86 +1,89 @@
+import { useEffect, useState } from "react";
 import { Card } from "./Card";
 import styles from "./Days.module.scss";
-import React from "react";
-import { Tabs } from "./Tabs";
+import { monthNames, tabs } from "../../../data/data";
+import { Day, Tab } from "../../../interface/interface";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { fetchCity } from "../../../store/weatherSlice";
 
-interface Props {}
+export const Days = () => {
+  const [selectedTab, setSelectedTab] = useState<Tab>(tabs[0]);
+  const [showContent, setShowContent] = useState(false);
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state.weather);
 
-export interface Day {
-  week_day: string;
-  day_info: string;
-  icon_id: string;
-  temp_day: string;
-  temp_night: string;
-  info: string;
-}
+  const handleSelectedTab = (tab: Tab) => {
+    return (event: React.MouseEvent) => {
+      setSelectedTab(tab);
+      dispatch(
+        fetchCity({
+          searchCity: state.city.location.name,
+          days: tab.value,
+        })
+      );
+      event.preventDefault();
+    };
+  };
 
-export const Days = (props: Props) => {
-  const days: Day[] = [
-    {
-      week_day: "Сегодня",
-      day_info: "28 авг",
-      icon_id: "sun",
-      temp_day: "+18",
-      temp_night: "+15",
-      info: "Облачно",
-    },
-    {
-      week_day: "Завтра",
-      day_info: "29 авг",
-      icon_id: "small_rain_sun",
-      temp_day: "+18",
-      temp_night: "+15",
-      info: "небольшой дождь и солнце",
-    },
-    {
-      week_day: "Ср",
-      day_info: "30 авг",
-      icon_id: "small_rain",
-      temp_day: "+18",
-      temp_night: "+15",
-      info: "небольшой дождь",
-    },
-    {
-      week_day: "Чт",
-      day_info: "28 авг",
-      icon_id: "mainly_cloudy",
-      temp_day: "+18",
-      temp_night: "+15",
-      info: "Облачно",
-    },
-    {
-      week_day: "Пт",
-      day_info: "28 авг",
-      icon_id: "rain",
-      temp_day: "+18",
-      temp_night: "+15",
-      info: "Облачно",
-    },
-    {
-      week_day: "Сб",
-      day_info: "28 авг",
-      icon_id: "sun",
-      temp_day: "+18",
-      temp_night: "+15",
-      info: "Облачно",
-    },
-    {
-      week_day: "Вс",
-      day_info: "28 авг",
-      icon_id: "sun",
-      temp_day: "+18",
-      temp_night: "+15",
-      info: "Облачно",
-    },
-  ];
+  console.log(selectedTab);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [dispatch]);
+
   return (
     <>
-      <Tabs />
-      <div className={styles.days}>
-        {days.map((day: Day) => (
-          <Card day={day} />
-        ))}
+      <div className={styles.tabs}>
+        <div className={styles.tabs_wrapper}>
+          {tabs.map((tab) => (
+            <div
+              className={styles.tab}
+              key={tab.value}
+              style={{
+                backgroundColor:
+                  tab.name === selectedTab.name ? "#4793ff" : "#fff",
+              }}
+              onClick={handleSelectedTab(tab)}
+            >
+              {tab.name}
+            </div>
+          ))}
+        </div>
+        <div
+          onClick={() => handleSelectedTab(tabs[0])}
+          className={styles.cansel}
+        >
+          Cancel
+        </div>
       </div>
+      {showContent && (
+        <div
+          className={styles.days}
+          style={{
+            justifyContent:
+              state.city.forecast.forecastday.length <= 7 ? "space-between" : "flex-start",
+              columnGap: state.city.forecast.forecastday.length <= 7 ? "0" : "18px",
+          }}
+        >
+          {state.city.forecast.forecastday
+            .map((day) => ({
+              date: `${monthNames[new Date(day.date).getMonth()]} ${new Date(
+                day.date
+              ).getDate()}`,
+              weatherText: day.day.condition.text,
+              weatherIcon: day.day.condition.icon,
+              minTemp: Math.round(day.day.mintemp_c),
+              maxTemp: Math.round(day.day.maxtemp_c),
+            }))
+            .map((day: Day) => {
+              return <Card day={day} key={day.date} />;
+            })}
+        </div>
+      )}
     </>
   );
 };

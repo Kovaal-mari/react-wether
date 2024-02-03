@@ -16,6 +16,7 @@
 .card {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background: rgba(71, 147, 255, 0.2);
   border-radius: 10px;
   padding: 10px;
@@ -94,4 +95,13 @@
 
 .tabs_wrapper {
   display: flex;
+}
+
+.selected-tab {
+  background-color: #000;
+}
+
+.weather_icon {
+  width: 64px !important;
+  height: 64px !important;
 }

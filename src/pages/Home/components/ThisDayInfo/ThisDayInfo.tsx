@@ -1,38 +1,38 @@
-import styles from "./ThisDayInfo.module.scss";
-import React from "react";
 import cloud from "../../../../assets/images/could.png";
+import { useAppSelector } from "../../../../store/hooks";
+import styles from "./ThisDayInfo.module.scss";
 import { ThisDayItem } from "./ThisDayItem";
 
-interface Props {}
 export interface Item {
   icon_id: string;
   name: string;
   value: string;
 }
 
-export const ThisDayInfo = (props: Props) => {
+export const ThisDayInfo = () => {
+  const state = useAppSelector((state) => state.weather);
+
   const items = [
     {
       icon_id: "temp",
-      name: "Температура",
-      value: "20° - відчувається як 17°",
+      name: "Temperature",
+      value: `${Math.round(
+        state.city.current.temp_c
+      )}°. Feels like ${Math.round(state.city.current.feelslike_c)}°`,
     },
     {
       icon_id: "pressure",
-      name: "Тиск",
-      value: "765 мм ртутного стовпа - нормальний",
+      name: "Pressure",
+      value: state.city.current.pressure_mb,
     },
     {
       icon_id: "precipitation",
-      name: "Вітер",
-      value: "3 м/c півдкнно західний - легкий вітер",
-    },
-    {
-      icon_id: "wind",
-      name: "Температура",
-      value: "20° - відчувається як 17°",
+      name: "Wind",
+      value: `${state.city.current.wind_kph} km/h`,
     },
   ];
+
+  console.log("state", state);
   return (
     <div className={styles.this_day_info}>
       <div className={styles.this_day_info_items}>
