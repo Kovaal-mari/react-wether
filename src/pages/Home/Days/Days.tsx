@@ -53,12 +53,6 @@ export const Days = () => {
             </div>
           ))}
         </div>
-        <div
-          onClick={() => handleSelectedTab(tabs[0])}
-          className={styles.cansel}
-        >
-          Cancel
-        </div>
       </div>
       {showContent && (
         <div
