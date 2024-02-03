@@ -1,16 +1,13 @@
+import { Link } from "react-router-dom";
 import { GlobalSvgSelector } from "../../assets/icons/global/GlobalSvgSelector";
+import Button from "../../components/Button/Button";
+import { optionType } from "../../interface/interface";
 import styles from "./Header.module.scss";
 import { ChangeEvent, useEffect, useState } from "react";
 
-interface Props {}
-export interface optionType {
-  name: string;
-  lat: number;
-  lon: number;
-}
-export const Header = (props: Props): JSX.Element => {
-  const APP_API_KEY = "df3985ac77c882760edb36893be3140b";
-  const [term, setTerm] = useState<string>("");
+export const Header = (): JSX.Element => {
+  const APP_API_KEY = process.env.APP_API_KEY;
+  const [searchCity, setSearchCity] = useState<string>("");
   const [city, setCity] = useState<optionType | null>(null);
   const [options, setOptions] = useState<[]>([]);
 
@@ -23,8 +20,8 @@ export const Header = (props: Props): JSX.Element => {
   };
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.trim();
-    setTerm(value);
+    const value = e.target.value;
+    setSearchCity(value);
     if (value === "") return;
     getSearchOptions(value);
   };
@@ -34,7 +31,7 @@ export const Header = (props: Props): JSX.Element => {
       `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&units=matric&appid=${APP_API_KEY}`
     )
       .then((res) => res.json())
-      .then((data) => console.log({ data }));
+      .then((data) => console.log(data));
   };
 
   const onSubmit = () => {
@@ -43,25 +40,27 @@ export const Header = (props: Props): JSX.Element => {
     getForecast(city);
   };
 
-  const onOpionSelect = (option: optionType) => {
+  const onOptionSelect = (option: optionType) => {
     setCity(option);
   };
 
   useEffect(() => {
     if (city) {
-      setTerm(city.name);
+      setSearchCity(city.name);
       setOptions([]);
     }
   }, [city]);
 
   return (
     <header className={styles.header}>
+      <Link className={styles.home_link} to="/">
       <div className={styles.wrapper}>
         <div className={styles.logo}>
           <GlobalSvgSelector id="header-logo" />
         </div>
         <div className={styles.title}>Weather ForeCasts</div>
       </div>
+      </Link>
       <div className={styles.wrapper}>
         <div className={styles.change_theme}>
           <GlobalSvgSelector id="change_theme" />
@@ -70,20 +69,20 @@ export const Header = (props: Props): JSX.Element => {
           <input
             className={styles.input}
             type="text"
-            value={term}
+            value={searchCity}
             onChange={onInputChange}
           />
           <ul>
             {options.map((option: optionType, index: number) => (
               <li key={option.name + "-" + index}>
                 {" "}
-                <button onClick={() => onOpionSelect(option)}>
+                <button onClick={() => onOptionSelect(option)}>
                   {option.name}
                 </button>
               </li>
             ))}
           </ul>
-          <button onClick={onSubmit}>Search</button>
+          <Button onClick={onSubmit}>Search</Button>
         </div>
       </div>
     </header>

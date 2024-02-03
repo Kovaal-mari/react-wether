@@ -1,12 +1,10 @@
+import { Link } from "react-router-dom";
+import { Days } from "./Days/Days";
 import styles from "./Home.module.scss";
-import React from "react";
 import { ThisDay } from "./components/ThisDay/ThisDay";
 import { ThisDayInfo } from "./components/ThisDayInfo/ThisDayInfo";
-import { Days } from "./Days/Days";
 
-interface Props {}
-
-export const Home = (props: Props) => {
+export const Home = () => {
   return (
     <div className={styles.home}>
       <div className={styles.wrapper}>
@@ -14,6 +12,13 @@ export const Home = (props: Props) => {
         <ThisDayInfo />
       </div>
       <Days />
+      <p className={styles.ask_text}>
+        Have any questions? Feel free to
+        <Link to="/contact-us" className={styles.ask_link}>
+          ask
+        </Link>
+        us about anything you want
+      </p>
     </div>
   );
 };

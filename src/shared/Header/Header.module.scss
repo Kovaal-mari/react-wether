@@ -11,6 +11,7 @@
 .wrapper {
   display: flex;
   align-items: center;
+  color: #000;
 }
 
 .change_theme,
@@ -67,14 +68,8 @@
       }
     }
   }
-  button {
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: $primary-color;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+}
+
+.home_link {
+  text-decoration: none;
 }
