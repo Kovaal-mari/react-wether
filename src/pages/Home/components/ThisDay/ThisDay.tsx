@@ -1,27 +1,60 @@
+import { useEffect, useState } from "react";
 import { GlobalSvgSelector } from "../../../../assets/icons/global/GlobalSvgSelector";
 import styles from "./ThisDay.module.scss";
-import React from "react";
+import { useAppSelector } from "../../../../store/hooks";
 
-interface Props {}
+export const ThisDay = () => {
+  const [showContent, setShowContent] = useState(false);
+  const state = useAppSelector((state) => state.weather);
 
-export const ThisDay = (props: Props) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  console.log("city", state);
+
   return (
     <div className={styles.this_day}>
       <div className={styles.top_block}>
         <div className={styles.top_block_wrapper}>
-          <div className={styles.this_temp}>20°</div>
-          <div className={styles.this_day_name}>Сьогодні</div>
+          {showContent && (
+            <>
+              <div className={styles.this_temp}>
+                {Math.round(state.city.current.temp_c)}°
+              </div>
+              <div className={styles.this_day_name}>Today</div>
+            </>
+          )}
         </div>
 
         <GlobalSvgSelector id="sun" />
       </div>
       <div className={styles.bottom_block}>
-        <div className={styles.this_time}>
-          Година: <span>21:54</span>
-        </div>
-        <div className={styles.this_city}>
-          Місто: <span>Київ</span>
-        </div>
+        {showContent && (
+          <>
+            <div className={styles.this_time}>
+              Time:{" "}
+              <span>
+                {new Date(state.city.location.localtime)
+                  .getHours()
+                  .toString()
+                  .padStart(2, "0")}
+                :
+                {new Date(state.city.location.localtime)
+                  .getMinutes()
+                  .toString()
+                  .padStart(2, "0")}
+              </span>
+            </div>
+            <div className={styles.this_city}>
+              City: <span>{state.city.location.name}</span>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -3,8 +3,17 @@ import { Days } from "./Days/Days";
 import styles from "./Home.module.scss";
 import { ThisDay } from "./components/ThisDay/ThisDay";
 import { ThisDayInfo } from "./components/ThisDayInfo/ThisDayInfo";
+import { AppDispatch } from "../../store/configureStore";
+import { useEffect } from "react";
+import { fetchCityByDefault } from "../../store/weatherSlice";
+import { useDispatch } from "react-redux";
 
 export const Home = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchCityByDefault());
+  }, [dispatch]);
   return (
     <div className={styles.home}>
       <div className={styles.wrapper}>

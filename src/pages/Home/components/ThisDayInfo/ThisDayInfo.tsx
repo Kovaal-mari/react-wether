@@ -1,16 +1,17 @@
-import styles from "./ThisDayInfo.module.scss";
-import React from "react";
 import cloud from "../../../../assets/images/could.png";
+import { useAppSelector } from "../../../../store/hooks";
+import styles from "./ThisDayInfo.module.scss";
 import { ThisDayItem } from "./ThisDayItem";
 
-interface Props {}
 export interface Item {
   icon_id: string;
   name: string;
   value: string;
 }
 
-export const ThisDayInfo = (props: Props) => {
+export const ThisDayInfo = () => {
+  const state = useAppSelector((state) => state.weather);
+
   const items = [
     {
       icon_id: "temp",
