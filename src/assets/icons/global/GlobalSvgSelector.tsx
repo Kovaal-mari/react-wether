@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   id: string;
 }
@@ -149,23 +147,6 @@ export const GlobalSvgSelector = ({ id }: Props) => {
             fill="#4793FF"
           />
         </svg>
-      );
-
-    case "sun":
-      return <img src="src\assets\images\day.svg" alt="sun" />;
-
-    case "rain":
-      return <img src="src\assets\images\rain.svg" alt="rain" />;
-    case "small_rain":
-      return <img src="src\assets\images\small_rain.svg" alt="small_rain" />;
-    case "small_rain_sun":
-      return (
-        <img src="src\assets\images\small_rain_sun.svg" alt="small_rain_sun" />
-      );
-
-    case "mainly_cloudy":
-      return (
-        <img src="src\assets\images\mainly_cloudy.svg" alt="mainly_cloudy" />
       );
     case "close":
       return (
