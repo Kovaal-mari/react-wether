@@ -1,9 +1,8 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home/Home";
 import { MonthStatistics } from "./pages/MonthStatistics/MonthStatistics";
 import { Header } from "./shared/Header/Header";
-import { Popup } from "./shared/Popup/Popup";
+import ContactUs from "./pages/ContactUs/ContactUs";
 
 function App() {
   return (
@@ -15,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" Component={Home} />
             <Route path="/month-statisrics" Component={MonthStatistics} />
+            <Route path="/contact-us" Component={ContactUs} />
           </Routes>
         </div>
       </div>
