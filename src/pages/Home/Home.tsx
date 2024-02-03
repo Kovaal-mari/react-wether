@@ -16,7 +16,7 @@ export const Home = () => {
 
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 150);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [dispatch]);
@@ -24,9 +24,7 @@ export const Home = () => {
     <div className={styles.home}>
       <div className={styles.wrapper}>
         <ThisDay />
-        {showContent && (
-          <ThisDayInfo />
-        )}
+        {showContent && <ThisDayInfo />}
       </div>
       <Days />
       <p className={styles.ask_text}>
