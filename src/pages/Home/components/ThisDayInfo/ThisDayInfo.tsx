@@ -15,25 +15,24 @@ export const ThisDayInfo = () => {
   const items = [
     {
       icon_id: "temp",
-      name: "Температура",
-      value: "20° - відчувається як 17°",
+      name: "Temperature",
+      value: `${Math.round(
+        state.city.current.temp_c
+      )}°. Feels like ${Math.round(state.city.current.feelslike_c)}°`,
     },
     {
       icon_id: "pressure",
-      name: "Тиск",
-      value: "765 мм ртутного стовпа - нормальний",
+      name: "Pressure",
+      value: state.city.current.pressure_mb,
     },
     {
       icon_id: "precipitation",
-      name: "Вітер",
-      value: "3 м/c півдкнно західний - легкий вітер",
-    },
-    {
-      icon_id: "wind",
-      name: "Температура",
-      value: "20° - відчувається як 17°",
+      name: "Wind",
+      value: `${state.city.current.wind_kph} km/h`,
     },
   ];
+
+  console.log("state", state);
   return (
     <div className={styles.this_day_info}>
       <div className={styles.this_day_info_items}>

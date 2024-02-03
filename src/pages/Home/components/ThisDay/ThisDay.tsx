@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { GlobalSvgSelector } from "../../../../assets/icons/global/GlobalSvgSelector";
-import styles from "./ThisDay.module.scss";
 import { useAppSelector } from "../../../../store/hooks";
+import styles from "./ThisDay.module.scss";
 
 export const ThisDay = () => {
   const [showContent, setShowContent] = useState(false);
@@ -15,23 +14,21 @@ export const ThisDay = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  console.log("city", state);
-
   return (
     <div className={styles.this_day}>
       <div className={styles.top_block}>
-        <div className={styles.top_block_wrapper}>
-          {showContent && (
-            <>
+        {showContent && (
+          <>
+            <div className={styles.top_block_wrapper}>
               <div className={styles.this_temp}>
                 {Math.round(state.city.current.temp_c)}°
               </div>
               <div className={styles.this_day_name}>Today</div>
-            </>
-          )}
-        </div>
-
-        <GlobalSvgSelector id="sun" />
+            </div>
+            <img className={styles.weather_icon} src={state.city.current.condition.icon} />
+          </>
+        )}
+        {/* <GlobalSvgSelector id="sun" /> */}
       </div>
       <div className={styles.bottom_block}>
         {showContent && (

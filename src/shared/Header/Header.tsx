@@ -33,8 +33,10 @@ export const Header = (): JSX.Element => {
   const onSubmit = () => {
     if (!city) return;
 
-    dispatch(fetchCity(searchCity));
-    setSearchCity("");
+    dispatch(fetchCity({
+      searchCity: searchCity,
+      days: 7,
+    }));
   };
 
   const onOptionSelect = (option: optionType) => {
