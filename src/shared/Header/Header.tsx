@@ -9,7 +9,6 @@ import { fetchCity } from "../../store/weatherSlice";
 import styles from "./Header.module.scss";
 
 export const Header = (): JSX.Element => {
-  const APP_API_KEY = process.env.APP_API_KEY;
   const [searchCity, setSearchCity] = useState<string>("");
   const [city, setCity] = useState<optionType | null>(null);
   const [options, setOptions] = useState<[]>([]);
@@ -17,7 +16,7 @@ export const Header = (): JSX.Element => {
 
   const getSearchOptions = (value: string) => {
     fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=${APP_API_KEY}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=df3985ac77c882760edb36893be3140b`
     )
       .then((res) => res.json())
       .then((data) => setOptions(data))
