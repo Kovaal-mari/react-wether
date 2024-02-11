@@ -9,7 +9,7 @@ export const ThisDay = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 150);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, []);
@@ -25,7 +25,10 @@ export const ThisDay = () => {
               </div>
               <div className={styles.this_day_name}>Today</div>
             </div>
-            <img className={styles.weather_icon} src={state.city.current.condition.icon} />
+            <img
+              className={styles.weather_icon}
+              src={state.city.current.condition.icon}
+            />
           </>
         )}
         {/* <GlobalSvgSelector id="sun" /> */}

@@ -30,7 +30,7 @@ export const Days = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 150);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [dispatch]);
@@ -59,8 +59,11 @@ export const Days = () => {
           className={styles.days}
           style={{
             justifyContent:
-              state.city.forecast.forecastday.length <= 7 ? "space-between" : "flex-start",
-              columnGap: state.city.forecast.forecastday.length <= 7 ? "0" : "18px",
+              state.city.forecast.forecastday.length <= 7
+                ? "space-between"
+                : "flex-start",
+            columnGap:
+              state.city.forecast.forecastday.length <= 7 ? "0" : "18px",
           }}
         >
           {state.city.forecast.forecastday

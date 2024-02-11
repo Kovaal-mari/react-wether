@@ -5,7 +5,7 @@ import { WeatherState } from "../interface/state";
 export const fetchCity = createAsyncThunk(
   "fetchCity",
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async (args: { searchCity: any, days: any }) => {
+  async (args: { searchCity: any; days: any }) => {
     try {
       const response = await axios.get(
         `https://api.weatherapi.com/v1/forecast.json?key=55f1ce97a2c8412dbb514135240302&q=${args.searchCity}&days=${args.days}`
@@ -50,7 +50,7 @@ const weatherSlice = createSlice({
       .addCase(fetchCityByDefault.fulfilled, (state, action) => {
         state.city = action.payload.cityByDefault;
       })
-      .addCase(fetchCityByDefault.rejected, () => {})
+      .addCase(fetchCityByDefault.rejected, () => {});
   },
 });
 
