@@ -16,7 +16,7 @@ export const Home = () => {
 
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 370);
+    }, 360);
 
     return () => clearTimeout(timer);
   }, [dispatch]);

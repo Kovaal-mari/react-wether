@@ -30,7 +30,7 @@ export const Days = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 370);
+    }, 360);
 
     return () => clearTimeout(timer);
   }, [dispatch]);
