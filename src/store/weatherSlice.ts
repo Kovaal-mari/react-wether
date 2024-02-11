@@ -8,7 +8,7 @@ export const fetchCity = createAsyncThunk(
   async (args: { searchCity: any, days: any }) => {
     try {
       const response = await axios.get(
-        `http://api.weatherapi.com/v1/forecast.json?key=55f1ce97a2c8412dbb514135240302&q=${args.searchCity}&days=${args.days}`
+        `https://api.weatherapi.com/v1/forecast.json?key=55f1ce97a2c8412dbb514135240302&q=${args.searchCity}&days=${args.days}`
       );
       return { city: response.data };
     } catch (error) {
@@ -22,7 +22,7 @@ export const fetchCityByDefault = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        "http://api.weatherapi.com/v1/forecast.json?key=55f1ce97a2c8412dbb514135240302&q=Kyiv&days=7"
+        "https://api.weatherapi.com/v1/forecast.json?key=55f1ce97a2c8412dbb514135240302&q=Kyiv&days=7"
       );
       return { cityByDefault: response.data };
     } catch (error) {
