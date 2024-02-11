@@ -9,7 +9,7 @@ export const ThisDay = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 300);
+    }, 350);
 
     return () => clearTimeout(timer);
   }, []);
