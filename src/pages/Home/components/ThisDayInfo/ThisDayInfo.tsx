@@ -1,4 +1,4 @@
-import cloud from "../../../../assets/images/could.png";
+import cloud from "../../../../assets/images/could.webp";
 import { useAppSelector } from "../../../../store/hooks";
 import styles from "./ThisDayInfo.module.scss";
 import { ThisDayItem } from "./ThisDayItem";

@@ -12,7 +12,7 @@ export const Card = ({ day }: Props) => {
       <div className={styles.day_info}> {day.weatherText}</div>
       <div className={styles.img}>
         {/* <GlobalSvgSelector id={icon_id} /> */}
-        <img className={styles.weather_icon} src={day.weatherIcon} />
+        <img className={styles.weather_icon} src={day.weatherIcon} alt="icon" />
       </div>
       <div>
         <div className={styles.temp_day}> {day.maxTemp}°</div>
