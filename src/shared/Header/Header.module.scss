@@ -6,7 +6,7 @@
   justify-content: space-between;
   width: 100%;
   margin-bottom: 30px;
-  @include breakpoint(md) {
+  @media screen and (max-width: 768px) {
     flex-wrap: wrap;
   }
 }
@@ -35,8 +35,8 @@
   align-items: center;
   gap: 10px;
   position: relative;
-  @include breakpoint(md) {
-    margin: 0 auto 20px;
+  @media screen and (max-width: 768px) {
+    margin: 0 auto;
   }
 
   input {

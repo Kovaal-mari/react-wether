@@ -9,7 +9,7 @@
   border-radius: $border-radius;
   margin-right: 10px;
   margin-left: 5px;
-  @include breakpoint(md) {
+  @media screen and (max-width: 768px) {
     margin: 0 auto 15px;
   }
 }
