@@ -8,6 +8,11 @@
   background: $light-background;
   box-shadow: $box-shadow;
   border-radius: $border-radius;
+  margin-right: 5px;
+  @include breakpoint(md) {
+    margin: 0 auto;
+    max-width: 700px;
+  }
 }
 
 .item {
@@ -54,4 +59,6 @@
   position: absolute;
   top: 0;
   right: 0;
+  width: 60%;
+  min-width: 300px;
 }

@@ -4,3 +4,11 @@ $border-radius: 20px;
 $primary-color: #4793ff;
 $light-color: #000;
 $basecolor: #939cb0;
+
+@mixin breakpoint($point) {
+  @if $point == md {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+}

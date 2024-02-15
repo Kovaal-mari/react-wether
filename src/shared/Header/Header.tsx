@@ -19,7 +19,7 @@ export const Header = (): JSX.Element => {
       `https://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=df3985ac77c882760edb36893be3140b`
     )
       .then((res) => res.json())
-      .then((data) => setOptions(data))
+      .then((data) => setOptions(data));
   };
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,10 +32,12 @@ export const Header = (): JSX.Element => {
   const onSubmit = () => {
     if (!city) return;
 
-    dispatch(fetchCity({
-      searchCity: searchCity,
-      days: 7,
-    }));
+    dispatch(
+      fetchCity({
+        searchCity: searchCity,
+        days: 7,
+      })
+    );
   };
 
   const onOptionSelect = (option: optionType) => {
@@ -52,37 +54,32 @@ export const Header = (): JSX.Element => {
   return (
     <header className={styles.header}>
       <Link className={styles.home_link} to="/">
-      <div className={styles.wrapper}>
-        <div className={styles.logo}>
-          <GlobalSvgSelector id="header-logo" />
+        <div className={styles.wrapper}>
+          <div className={styles.logo}>
+            <GlobalSvgSelector id="header-logo" />
+          </div>
+          <div className={styles.title}>Weather ForeCasts</div>
         </div>
-        <div className={styles.title}>Weather ForeCasts</div>
-      </div>
       </Link>
-      <div className={styles.wrapper}>
-        <div className={styles.change_theme}>
-          <GlobalSvgSelector id="change_theme" />
-        </div>
-        <div className={styles.search}>
-          <input
-            className={styles.input}
-            type="text"
-            value={searchCity}
-            onChange={onInputChange}
-            placeholder="New York"
-          />
-          <ul>
-            {options.map((option: optionType, index: number) => (
-              <li key={option.name + "-" + index}>
-                {" "}
-                <button onClick={() => onOptionSelect(option)}>
-                  {option.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-          <Button onClick={onSubmit}>Search</Button>
-        </div>
+      <div className={styles.search}>
+        <input
+          className={styles.input}
+          type="text"
+          value={searchCity}
+          onChange={onInputChange}
+          placeholder="New York"
+        />
+        <ul>
+          {options.map((option: optionType, index: number) => (
+            <li key={option.name + "-" + index}>
+              {" "}
+              <button onClick={() => onOptionSelect(option)}>
+                {option.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <Button onClick={onSubmit}>Search</Button>
       </div>
     </header>
   );

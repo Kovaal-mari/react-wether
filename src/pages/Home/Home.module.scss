@@ -1,7 +1,12 @@
+@import "../../styles/variables.scss";
+
 .wrapper {
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
+  @include breakpoint(md) {
+    flex-wrap: wrap;
+  }
 }
 
 .ask_text {
